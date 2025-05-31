@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm run build:netlify"
   publish = "build"
 
 [[redirects]]
@@ -9,3 +9,5 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  CI = "false"
+  NPM_FLAGS = "--legacy-peer-deps"

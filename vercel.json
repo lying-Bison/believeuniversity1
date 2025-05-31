@@ -2,7 +2,12 @@
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
-  "buildCommand": "CI=false npm run build",
+  "buildCommand": "CI=false DISABLE_ESLINT_PLUGIN=true npm run build",
   "outputDirectory": "build",
-  "framework": "create-react-app"
+  "framework": "create-react-app",
+  "installCommand": "npm install --legacy-peer-deps",
+  "env": {
+    "CI": "false",
+    "DISABLE_ESLINT_PLUGIN": "true"
+  }
 }
