@@ -138,22 +138,22 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 {subtitle}
               </HeroSubtitle>
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2 }}>
-                <PrimaryButton 
-                  component={RouterLink} 
-                  to={primaryButtonLink} 
-                  variant="contained" 
-                  size="large"
-                >
-                  {primaryButtonText}
-                </PrimaryButton>
-                <SecondaryButton 
-                  component={RouterLink} 
-                  to={secondaryButtonLink} 
-                  variant="outlined" 
-                  size="large"
-                >
-                  {secondaryButtonText}
-                </SecondaryButton>
+                <RouterLink to={primaryButtonLink} style={{ textDecoration: 'none' }}>
+                  <PrimaryButton 
+                    variant="contained" 
+                    size="large"
+                  >
+                    {primaryButtonText}
+                  </PrimaryButton>
+                </RouterLink>
+                <RouterLink to={secondaryButtonLink} style={{ textDecoration: 'none' }}>
+                  <SecondaryButton 
+                    variant="outlined" 
+                    size="large"
+                  >
+                    {secondaryButtonText}
+                  </SecondaryButton>
+                </RouterLink>
               </Box>
             </Box>
           </Box>
