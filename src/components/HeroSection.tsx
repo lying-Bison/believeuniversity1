@@ -125,8 +125,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   return (
     <HeroWrapper>
       <Container maxWidth="lg">
-        <Grid container spacing={4} alignItems="center">
-          <Grid item xs={12} md={6}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 4, alignItems: 'center' }}>
+          <Box>
             <Box sx={{ position: 'relative', zIndex: 1 }}>
               <GradientText variant="h6" gutterBottom>
                 @BEUhouse
@@ -156,8 +156,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 </SecondaryButton>
               </Box>
             </Box>
-          </Grid>
-          <Grid item xs={12} md={6}>
+          </Box>
+          <Box>
             <HeroImage>
               {/* Placeholder for hero image - in a real implementation, replace with actual images */}
               <Box
@@ -219,8 +219,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({
                 }}
               />
             </HeroImage>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Container>
     </HeroWrapper>
   );
