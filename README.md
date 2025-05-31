@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# BEUhouse
+
+A platform focused on cryptocurrency education, speculative trading, and community-driven investments, particularly emphasizing meme coins.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

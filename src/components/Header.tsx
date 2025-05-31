@@ -1,0 +1,392 @@
+import React, { useState } from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Menu,
+  Container,
+  Avatar,
+  Button,
+  Tooltip,
+  MenuItem,
+  Link,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Divider,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
+import {
+  Menu as MenuIcon,
+  AccountCircle,
+  Home,
+  School,
+  Forum,
+  Article,
+  ShowChart,
+  Info,
+  Login,
+  PersonAdd,
+  Logout,
+  Close,
+} from '@mui/icons-material';
+import styled from 'styled-components';
+import { useAuth } from '../context/AuthContext';
+import { colors } from '../styles/theme';
+
+const StyledAppBar = styled(AppBar)`
+  background: linear-gradient(135deg, ${colors.deepBlue} 0%, #1E4B8D 100%);
+`;
+
+const LogoText = styled(Typography)`
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, ${colors.white} 0%, ${colors.vibrantYellow} 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+`;
+
+const NavButton = styled(Button)<{ active?: boolean }>`
+  position: relative;
+  margin: 0 8px;
+  color: ${colors.white};
+  font-weight: 700;
+  font-size: 1rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 6px 16px;
+  border-radius: 8px;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    width: ${props => (props.active ? '100%' : '0')};
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: ${colors.vibrantYellow};
+    transition: width 0.3s ease;
+  }
+  
+  &:hover {
+    color: ${colors.vibrantYellow};
+  }
+  
+  &:hover:after {
+    width: 100%;
+  }
+`;
+
+const MobileNavItem = styled(ListItem)`
+  &.active {
+    background-color: rgba(240, 193, 75, 0.1);
+  }
+  
+  &:hover {
+    background-color: rgba(240, 193, 75, 0.05);
+  }
+`;
+
+const MobileMenuIcon = styled(MenuIcon)`
+  color: ${colors.white};
+`;
+
+const Header: React.FC = () => {
+  const { currentUser, logout } = useAuth();
+  const location = useLocation();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+  
+  const handleToggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+  
+  const handleLogout = async () => {
+    await logout();
+    handleCloseUserMenu();
+  };
+  
+  const isActive = (path: string) => {
+    return location.pathname === path;
+  };
+  
+  const pages = [
+    { name: 'Home', path: '/', icon: <Home /> },
+    { name: 'Education', path: '/education', icon: <School /> },
+    { name: 'Community', path: '/community', icon: <Forum /> },
+    { name: 'Blog', path: '/blog', icon: <Article /> },
+    { name: 'Crypto Tracker', path: '/tracker', icon: <ShowChart /> },
+    { name: 'About', path: '/about', icon: <Info /> },
+  ];
+  
+  return (
+    <StyledAppBar position="sticky">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          {/* Logo for desktop */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 2 }}>
+            <RouterLink to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center' }}>
+              <LogoText variant="h4" noWrap>
+                @BEUhouse
+              </LogoText>
+            </RouterLink>
+          </Box>
+          
+          {/* Mobile menu icon */}
+          <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="menu"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleToggleMobileMenu}
+              color="inherit"
+            >
+              <MobileMenuIcon />
+            </IconButton>
+          </Box>
+          
+          {/* Logo for mobile */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, justifyContent: 'center' }}>
+            <RouterLink to="/" style={{ textDecoration: 'none' }}>
+              <LogoText variant="h5" noWrap>
+                @BEUhouse
+              </LogoText>
+            </RouterLink>
+          </Box>
+          
+          {/* Desktop navigation */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
+            {pages.map((page) => (
+              <NavButton
+                key={page.name}
+                as={RouterLink}
+                to={page.path}
+                active={isActive(page.path)}
+              >
+                {page.name}
+              </NavButton>
+            ))}
+          </Box>
+          
+          {/* User menu */}
+          <Box sx={{ flexGrow: 0 }}>
+            {currentUser ? (
+              <>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar 
+                      alt={currentUser.username} 
+                      src={currentUser.avatar || undefined}
+                      sx={{ bgcolor: colors.vibrantYellow, color: colors.deepBlue }}
+                    >
+                      {currentUser.username.charAt(0).toUpperCase()}
+                    </Avatar>
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem onClick={handleCloseUserMenu} component={RouterLink} to="/profile">
+                    <Typography textAlign="center">Profile</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleCloseUserMenu} component={RouterLink} to="/dashboard">
+                    <Typography textAlign="center">Dashboard</Typography>
+                  </MenuItem>
+                  <MenuItem onClick={handleLogout}>
+                    <Typography textAlign="center">Logout</Typography>
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <Box sx={{ display: 'flex', gap: 1 }}>
+                <ListItem
+                  onClick={() => {
+                    handleToggleMobileMenu();
+                    window.location.href = '/login';
+                  }}
+                >
+                  <Button
+                    sx={{ 
+                      color: colors.white, 
+                      borderColor: colors.white,
+                      '&:hover': {
+                        borderColor: colors.vibrantYellow,
+                        backgroundColor: 'rgba(240, 193, 75, 0.1)',
+                      }
+                    }}
+                  >
+                    Login
+                  </Button>
+                </ListItem>
+                <ListItem
+                  onClick={() => {
+                    handleToggleMobileMenu();
+                    window.location.href = '/register';
+                  }}
+                >
+                  <Button
+                    sx={{ 
+                      bgcolor: colors.vibrantYellow,
+                      color: colors.deepBlue,
+                      '&:hover': {
+                        bgcolor: '#D9A82C',
+                      },
+                    }}
+                  >
+                    Register
+                  </Button>
+                </ListItem>
+              </Box>
+            )}
+          </Box>
+        </Toolbar>
+      </Container>
+      
+      {/* Mobile menu drawer */}
+      <Drawer
+        anchor="left"
+        open={mobileMenuOpen}
+        onClose={handleToggleMobileMenu}
+        PaperProps={{
+          sx: {
+            width: 280,
+            bgcolor: colors.deepBlue,
+            color: colors.white,
+          }
+        }}
+      >
+        <Box sx={{ p: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <LogoText variant="h5">@BEUhouse</LogoText>
+          <IconButton onClick={handleToggleMobileMenu} sx={{ color: colors.white }}>
+            <Close />
+          </IconButton>
+        </Box>
+        <Divider sx={{ bgcolor: 'rgba(255, 255, 255, 0.1)' }} />
+        <List>
+          {pages.map((page) => (
+            <ListItem
+              key={page.name}
+              onClick={handleToggleMobileMenu}
+              className={isActive(page.path) ? 'active' : ''}
+              sx={{
+                color: isActive(page.path) ? colors.vibrantYellow : colors.white,
+                '&:hover': {
+                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                },
+              }}
+            >
+              <ListItemIcon sx={{ color: isActive(page.path) ? colors.vibrantYellow : colors.white, minWidth: 40 }}>
+                {page.icon}
+              </ListItemIcon>
+              <ListItemText 
+                primary={page.name} 
+                sx={{ 
+                  '& .MuiListItemText-primary': {
+                    color: isActive(page.path) ? colors.vibrantYellow : colors.white,
+                    fontWeight: isActive(page.path) ? 600 : 500,
+                  }
+                }} 
+              />
+            </ListItem>
+          ))}
+        </List>
+        <Divider sx={{ bgcolor: 'rgba(255, 255, 255, 0.1)' }} />
+        {currentUser ? (
+          <List>
+            <MobileNavItem as={RouterLink} to="/profile" onClick={handleToggleMobileMenu}>
+              <ListItemIcon sx={{ color: colors.vibrantYellow, minWidth: 40 }}>
+                <AccountCircle />
+              </ListItemIcon>
+              <ListItemText primary="Profile" />
+            </MobileNavItem>
+            <MobileNavItem as={RouterLink} to="/dashboard" onClick={handleToggleMobileMenu}>
+              <ListItemIcon sx={{ color: colors.vibrantYellow, minWidth: 40 }}>
+                <ShowChart />
+              </ListItemIcon>
+              <ListItemText primary="Dashboard" />
+            </MobileNavItem>
+            <MobileNavItem onClick={handleLogout}>
+              <ListItemIcon sx={{ color: colors.vibrantYellow, minWidth: 40 }}>
+                <Logout />
+              </ListItemIcon>
+              <ListItemText primary="Logout" />
+            </MobileNavItem>
+          </List>
+        ) : (
+          <Box sx={{ p: 2, display: 'flex', flexDirection: 'column', gap: 1 }}>
+            <Button
+              component={RouterLink}
+              to="/login"
+              variant="outlined"
+              fullWidth
+              sx={{ 
+                color: colors.white, 
+                borderColor: colors.white,
+                '&:hover': {
+                  borderColor: colors.vibrantYellow,
+                  backgroundColor: 'rgba(240, 193, 75, 0.1)',
+                }
+              }}
+              startIcon={<Login />}
+              onClick={handleToggleMobileMenu}
+            >
+              Login
+            </Button>
+            <Button
+              component={RouterLink}
+              to="/register"
+              variant="contained"
+              fullWidth
+              sx={{ 
+                bgcolor: colors.vibrantYellow,
+                color: colors.deepBlue,
+                '&:hover': {
+                  bgcolor: '#D9A82C',
+                },
+              }}
+              startIcon={<PersonAdd />}
+              onClick={handleToggleMobileMenu}
+            >
+              Register
+            </Button>
+          </Box>
+        )}
+      </Drawer>
+    </StyledAppBar>
+  );
+};
+
+export default Header;

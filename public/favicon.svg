@@ -1,0 +1,11 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="32" height="32" rx="4" fill="#0A2D5A"/>
+  
+  <!-- BEU text -->
+  <text x="16" y="22" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#F0C14B">B</text>
+  
+  <!-- Decorative coin element -->
+  <circle cx="16" cy="10" r="5" fill="#F0C14B" fill-opacity="0.7"/>
+  <circle cx="16" cy="10" r="3" fill="#0A2D5A"/>
+</svg>

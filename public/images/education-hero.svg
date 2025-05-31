@@ -1,0 +1,46 @@
+<svg width="500" height="400" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background elements -->
+  <circle cx="250" cy="200" r="150" fill="#0A2D5A" fill-opacity="0.1"/>
+  <circle cx="250" cy="200" r="100" fill="#0A2D5A" fill-opacity="0.2"/>
+  
+  <!-- Books and educational elements -->
+  <rect x="180" y="150" width="140" height="100" rx="5" ry="5" fill="#0A2D5A"/>
+  <rect x="185" y="155" width="130" height="90" rx="3" ry="3" fill="#1E4B8D"/>
+  <text x="250" y="200" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="white">CRYPTO 101</text>
+  
+  <!-- Graduation cap -->
+  <path d="M250,120 L200,140 L250,160 L300,140 Z" fill="#F0C14B"/>
+  <path d="M250,160 L250,180 L230,170 L230,150 Z" fill="#F0C14B"/>
+  <rect x="240" y="110" width="20" height="10" rx="2" ry="2" fill="#F0C14B"/>
+  
+  <!-- Coins around the book -->
+  <circle cx="150" cy="200" r="25" fill="#F7931A"/>
+  <circle cx="150" cy="200" r="20" fill="#F9AA4B"/>
+  <text x="150" y="205" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">₿</text>
+  
+  <circle cx="350" cy="200" r="25" fill="#627EEA"/>
+  <circle cx="350" cy="200" r="20" fill="#8CA3F4"/>
+  <text x="350" y="205" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Ξ</text>
+  
+  <circle cx="250" cy="250" r="25" fill="#F0C14B"/>
+  <circle cx="250" cy="250" r="20" fill="#F7D47E"/>
+  <text x="250" y="255" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#0A2D5A">M</text>
+  
+  <!-- Light bulb for ideas -->
+  <circle cx="250" cy="80" r="15" fill="#F0C14B"/>
+  <path d="M240,90 Q250,105 260,90" fill="none" stroke="#0A2D5A" stroke-width="2"/>
+  <rect x="245" y="90" width="10" height="15" rx="2" ry="2" fill="#F0C14B"/>
+  
+  <!-- Chart elements -->
+  <line x1="100" y1="300" x2="400" y2="300" stroke="#0A2D5A" stroke-width="2"/>
+  <line x1="100" y1="300" x2="100" y2="200" stroke="#0A2D5A" stroke-width="2"/>
+  
+  <polyline points="100,280 150,260 200,270 250,240 300,250 350,230 400,240" 
+            stroke="#00A651" stroke-width="3" fill="none"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="10" fill="#F0C14B" fill-opacity="0.5"/>
+  <circle cx="400" cy="100" r="10" fill="#F0C14B" fill-opacity="0.5"/>
+  <circle cx="100" cy="350" r="10" fill="#F0C14B" fill-opacity="0.5"/>
+  <circle cx="400" cy="350" r="10" fill="#F0C14B" fill-opacity="0.5"/>
+</svg>

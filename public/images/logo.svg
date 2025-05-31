@@ -1,0 +1,15 @@
+<svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <!-- BEU text -->
+  <text x="10" y="45" font-family="'Bebas Neue', sans-serif" font-size="48" font-weight="bold" fill="#0A2D5A">BEU</text>
+  
+  <!-- house icon -->
+  <g transform="translate(120, 10) scale(0.8)">
+    <path d="M40,20 L60,0 L80,20 L80,50 L60,50 L60,35 L40,35 L40,50 L20,50 L20,20 L40,20 Z" fill="#F0C14B"/>
+    <path d="M60,0 L80,20 L60,20 L60,0 Z" fill="#0A2D5A"/>
+  </g>
+  
+  <!-- Coin element -->
+  <circle cx="170" cy="30" r="15" fill="#F0C14B"/>
+  <circle cx="170" cy="30" r="12" fill="#FFFFFF"/>
+  <text x="170" y="35" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#0A2D5A">$</text>
+</svg>

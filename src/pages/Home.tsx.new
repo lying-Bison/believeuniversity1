@@ -1,0 +1,744 @@
+import React from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import {
+  Box,
+  Container,
+  Typography,
+  Grid,
+  Card,
+  CardContent,
+  CardMedia,
+  Button,
+  Divider,
+  Paper,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
+import {
+  School,
+  Forum,
+  ShowChart,
+  ArrowForward,
+} from '@mui/icons-material';
+import styled from 'styled-components';
+import { colors } from '../styles/theme';
+import CryptoTracker from '../components/CryptoTracker';
+import InvestmentSimulator from '../components/InvestmentSimulator';
+
+const HeroWrapper = styled(Box)`
+  background: linear-gradient(135deg, ${colors.deepBlue} 0%, #071D3B 100%);
+  color: ${colors.white};
+  padding: 6rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/crypto-pattern.png');
+    background-size: cover;
+    opacity: 0.1;
+    z-index: 0;
+  }
+`;
+
+const SectionWrapper = styled(Box)<{ bgcolor?: string }>`
+  padding: 5rem 0;
+  background-color: ${props => props.bgcolor || 'transparent'};
+`;
+
+const SectionTitle = styled(Typography)`
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: 'Bebas Neue', sans-serif;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -8px;
+    width: 60px;
+    height: 3px;
+    background-color: ${colors.vibrantYellow};
+  }
+`;
+
+const FeatureCard = styled(Card)`
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  }
+`;
+
+const TestimonialCard = styled(Card)`
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+  position: relative;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+  
+  &:before {
+    content: '"';
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    font-size: 100px;
+    font-family: Georgia, serif;
+    color: rgba(10, 45, 90, 0.1);
+    line-height: 1;
+  }
+`;
+
+const IconBox = styled(Box)`
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, ${colors.deepBlue} 0%, #1E4B8D 100%);
+  color: ${colors.white};
+`;
+
+const StatsBox = styled(Box)`
+  background: linear-gradient(135deg, ${colors.deepBlue} 0%, #071D3B 100%);
+  color: ${colors.white};
+  padding: 3rem;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/crypto-pattern.png');
+    background-size: cover;
+    opacity: 0.05;
+    z-index: 0;
+  }
+`;
+
+const StatNumber = styled(Typography)`
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem;
+  color: ${colors.vibrantYellow};
+  margin-bottom: 0.5rem;
+`;
+
+const CtaSection = styled(Box)`
+  background: linear-gradient(135deg, ${colors.deepBlue} 0%, #071D3B 100%);
+  color: ${colors.white};
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+  
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/crypto-pattern.png');
+    background-size: cover;
+    opacity: 0.1;
+    z-index: 0;
+  }
+`;
+
+const Home: React.FC = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
+  return (
+    <Box>
+      {/* Hero Section */}
+      <HeroWrapper>
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+          <Box sx={{ 
+            display: 'flex', 
+            flexDirection: { xs: 'column', md: 'row' }, 
+            alignItems: 'center',
+            gap: 4
+          }}>
+            <Box sx={{ flex: 1 }}>
+              <Typography variant="h6" sx={{ color: colors.vibrantYellow, mb: 1 }}>
+                Welcome to @BEUhouse
+              </Typography>
+              <Typography variant="h3" sx={{ fontFamily: '"Bebas Neue", sans-serif', mb: 2 }}>
+                Your Gateway to Cryptocurrency Education & Community
+              </Typography>
+              <Typography variant="body1" sx={{ mb: 3, opacity: 0.9 }}>
+                Join our community-driven platform dedicated to cryptocurrency education, with a special focus on meme coins. Learn, connect, and grow your investment knowledge.
+              </Typography>
+              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+                <Button
+                  component={RouterLink}
+                  to="/education"
+                  variant="contained"
+                  size="large"
+                  sx={{ 
+                    bgcolor: colors.vibrantYellow,
+                    color: colors.deepBlue,
+                    '&:hover': {
+                      bgcolor: '#D9A82C',
+                    },
+                  }}
+                >
+                  Start Learning
+                </Button>
+                <Button
+                  component={RouterLink}
+                  to="/community"
+                  variant="outlined"
+                  size="large"
+                  sx={{ 
+                    borderColor: colors.white,
+                    color: colors.white,
+                    '&:hover': {
+                      borderColor: colors.vibrantYellow,
+                      backgroundColor: 'rgba(240, 193, 75, 0.1)',
+                    },
+                  }}
+                >
+                  Join Community
+                </Button>
+              </Box>
+            </Box>
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+              <Box
+                component="img"
+                src="/images/hero-illustration.svg"
+                alt="Cryptocurrency Education"
+                sx={{
+                  maxWidth: '100%',
+                  height: 'auto',
+                  filter: 'drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2))',
+                  animation: 'float 6s ease-in-out infinite',
+                  '@keyframes float': {
+                    '0%': {
+                      transform: 'translateY(0px)',
+                    },
+                    '50%': {
+                      transform: 'translateY(-10px)',
+                    },
+                    '100%': {
+                      transform: 'translateY(0px)',
+                    },
+                  },
+                }}
+              />
+            </Box>
+          </Box>
+        </Container>
+      </HeroWrapper>
+      
+      {/* Features Section */}
+      <SectionWrapper>
+        <Container maxWidth="lg">
+          <SectionTitle variant="h3">
+            What We Offer
+          </SectionTitle>
+          <Typography variant="body1" color="textSecondary" align="center" sx={{ mb: 6, maxWidth: 800, mx: 'auto' }}>
+            Explore our comprehensive resources and tools designed to help you navigate the world of cryptocurrency.
+          </Typography>
+          
+          <Grid container spacing={4}>
+            {/* Feature 1 */}
+            <Grid sx={{ width: { xs: '100%', sm: '50%', md: '33.33%' }, p: 2 }}>
+              <FeatureCard>
+                <CardContent sx={{ p: 4 }}>
+                  <IconBox>
+                    <School fontSize="large" />
+                  </IconBox>
+                  <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
+                    Educational Resources
+                  </Typography>
+                  <Typography variant="body1" color="textSecondary">
+                    Access comprehensive guides, tutorials, and articles about cryptocurrency investments, blockchain technology, and meme coins.
+                  </Typography>
+                  <Button 
+                    component={RouterLink} 
+                    to="/education" 
+                    sx={{ mt: 2, color: colors.deepBlue }}
+                  >
+                    Start Learning
+                  </Button>
+                </CardContent>
+              </FeatureCard>
+            </Grid>
+            
+            {/* Feature 2 */}
+            <Grid sx={{ width: { xs: '100%', sm: '50%', md: '33.33%' }, p: 2 }}>
+              <FeatureCard>
+                <CardContent sx={{ p: 4 }}>
+                  <IconBox>
+                    <Forum fontSize="large" />
+                  </IconBox>
+                  <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
+                    Community Engagement
+                  </Typography>
+                  <Typography variant="body1" color="textSecondary">
+                    Join discussions, share insights, and connect with like-minded individuals in our vibrant community forums.
+                  </Typography>
+                  <Button 
+                    component={RouterLink} 
+                    to="/community" 
+                    sx={{ mt: 2, color: colors.deepBlue }}
+                  >
+                    Join Community
+                  </Button>
+                </CardContent>
+              </FeatureCard>
+            </Grid>
+            
+            {/* Feature 3 */}
+            <Grid sx={{ width: { xs: '100%', sm: '50%', md: '33.33%' }, p: 2 }}>
+              <FeatureCard>
+                <CardContent sx={{ p: 4 }}>
+                  <IconBox>
+                    <ShowChart fontSize="large" />
+                  </IconBox>
+                  <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
+                    Investment Tools
+                  </Typography>
+                  <Typography variant="body1" color="textSecondary">
+                    Track real-time crypto prices and practice investment strategies with our simulator without risking real money.
+                  </Typography>
+                  <Button 
+                    component={RouterLink} 
+                    to="/simulator" 
+                    sx={{ mt: 2, color: colors.deepBlue }}
+                  >
+                    Try Simulator
+                  </Button>
+                </CardContent>
+              </FeatureCard>
+            </Grid>
+          </Grid>
+        </Container>
+      </SectionWrapper>
+      
+      {/* Crypto Tracker Section */}
+      <SectionWrapper bgcolor={colors.lightGray}>
+        <Container maxWidth="lg">
+          <SectionTitle variant="h3">
+            Cryptocurrency Tracker
+          </SectionTitle>
+          <Typography variant="body1" color="textSecondary" align="center" sx={{ mb: 4, maxWidth: 800, mx: 'auto' }}>
+            Stay updated with real-time prices and market data for major cryptocurrencies and popular meme coins.
+          </Typography>
+        </Container>
+        
+        <CryptoTracker />
+        
+        <Box sx={{ textAlign: 'center', mt: 4 }}>
+          <Button
+            component={RouterLink}
+            to="/tracker"
+            variant="contained"
+            size="large"
+            sx={{ 
+              bgcolor: colors.deepBlue,
+              '&:hover': {
+                bgcolor: '#1E4B8D',
+              },
+            }}
+          >
+            View Full Tracker
+          </Button>
+        </Box>
+      </SectionWrapper>
+      
+      {/* Stats Section */}
+      <SectionWrapper>
+        <Container maxWidth="lg">
+          <StatsBox>
+            <Grid container spacing={4} sx={{ position: 'relative', zIndex: 1 }}>
+              <Grid sx={{ width: { xs: '100%', md: '41.66%' }, p: 2 }}>
+                <Typography variant="h4" sx={{ fontFamily: '"Bebas Neue", sans-serif', mb: 2 }}>
+                  Why Choose @BEUhouse?
+                </Typography>
+                <Typography variant="body1" sx={{ mb: 3, opacity: 0.9 }}>
+                  We're dedicated to providing a trustworthy platform for cryptocurrency education and community engagement, with a special focus on meme coins and speculative trading.
+                </Typography>
+                <Typography variant="body1" sx={{ opacity: 0.9 }}>
+                  Our mission is to empower investors with knowledge, tools, and a supportive community to navigate the exciting but volatile world of cryptocurrency.
+                </Typography>
+                <Button
+                  component={RouterLink}
+                  to="/about"
+                  variant="outlined"
+                  sx={{ 
+                    mt: 3, 
+                    color: colors.white, 
+                    borderColor: colors.white,
+                    '&:hover': {
+                      borderColor: colors.vibrantYellow,
+                      backgroundColor: 'rgba(240, 193, 75, 0.1)',
+                    }
+                  }}
+                >
+                  Learn More About Us
+                </Button>
+              </Grid>
+              
+              <Grid sx={{ width: { xs: '100%', md: '58.33%' }, p: 2 }}>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', mx: -2 }}>
+                  <Box sx={{ width: { xs: '50%' }, p: 2 }}>
+                    <StatNumber variant="h2">10,000+</StatNumber>
+                    <Typography variant="body1" sx={{ opacity: 0.9 }}>
+                      Community Members
+                    </Typography>
+                  </Box>
+                  <Box sx={{ width: { xs: '50%' }, p: 2 }}>
+                    <StatNumber variant="h2">500+</StatNumber>
+                    <Typography variant="body1" sx={{ opacity: 0.9 }}>
+                      Educational Articles
+                    </Typography>
+                  </Box>
+                  <Box sx={{ width: { xs: '50%' }, p: 2 }}>
+                    <StatNumber variant="h2">50+</StatNumber>
+                    <Typography variant="body1" sx={{ opacity: 0.9 }}>
+                      Cryptocurrencies Tracked
+                    </Typography>
+                  </Box>
+                  <Box sx={{ width: { xs: '50%' }, p: 2 }}>
+                    <StatNumber variant="h2">24/7</StatNumber>
+                    <Typography variant="body1" sx={{ opacity: 0.9 }}>
+                      Community Support
+                    </Typography>
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
+          </StatsBox>
+        </Container>
+      </SectionWrapper>
+      
+      {/* Blog Preview Section */}
+      <SectionWrapper bgcolor={colors.lightGray}>
+        <Container maxWidth="lg">
+          <SectionTitle variant="h3">
+            Latest from Our Blog
+          </SectionTitle>
+          <Typography variant="body1" color="textSecondary" align="center" sx={{ mb: 6, maxWidth: 800, mx: 'auto' }}>
+            Stay informed with our latest articles, guides, and insights on cryptocurrency, blockchain technology, and meme coins.
+          </Typography>
+          
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', mx: -2 }}>
+            {/* Blog Post 1 */}
+            <Box sx={{ width: { xs: '100%', sm: '50%', md: '33.33%' }, p: 2 }}>
+              <FeatureCard>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image="/images/blog-post-1.jpg"
+                  alt="Understanding Meme Coins"
+                />
+                <CardContent sx={{ p: 3 }}>
+                  <Typography variant="body2" color="textSecondary" gutterBottom>
+                    May 25, 2025 • 5 min read
+                  </Typography>
+                  <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
+                    Understanding Meme Coins: Beyond the Hype
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+                    Explore the phenomenon of meme coins, their market dynamics, and what makes them different from traditional cryptocurrencies.
+                  </Typography>
+                  <Button 
+                    component={RouterLink} 
+                    to="/blog/understanding-meme-coins" 
+                    endIcon={<ArrowForward />}
+                    sx={{ color: colors.deepBlue }}
+                  >
+                    Read More
+                  </Button>
+                </CardContent>
+              </FeatureCard>
+            </Box>
+            
+            {/* Blog Post 2 */}
+            <Box sx={{ width: { xs: '100%', sm: '50%', md: '33.33%' }, p: 2 }}>
+              <FeatureCard>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image="/images/blog-post-2.jpg"
+                  alt="Risk Management in Crypto"
+                />
+                <CardContent sx={{ p: 3 }}>
+                  <Typography variant="body2" color="textSecondary" gutterBottom>
+                    May 20, 2025 • 7 min read
+                  </Typography>
+                  <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
+                    Essential Risk Management Strategies for Crypto Investors
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+                    Learn practical risk management techniques to protect your investments in the volatile cryptocurrency market.
+                  </Typography>
+                  <Button 
+                    component={RouterLink} 
+                    to="/blog/risk-management-strategies" 
+                    endIcon={<ArrowForward />}
+                    sx={{ color: colors.deepBlue }}
+                  >
+                    Read More
+                  </Button>
+                </CardContent>
+              </FeatureCard>
+            </Box>
+            
+            {/* Blog Post 3 */}
+            <Box sx={{ width: { xs: '100%', sm: '50%', md: '33.33%' }, p: 2 }}>
+              <FeatureCard>
+                <CardMedia
+                  component="img"
+                  height="200"
+                  image="/images/blog-post-3.jpg"
+                  alt="Technical Analysis Basics"
+                />
+                <CardContent sx={{ p: 3 }}>
+                  <Typography variant="body2" color="textSecondary" gutterBottom>
+                    May 15, 2025 • 6 min read
+                  </Typography>
+                  <Typography variant="h5" component="h2" gutterBottom sx={{ fontWeight: 600 }}>
+                    Technical Analysis Basics for Cryptocurrency Trading
+                  </Typography>
+                  <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+                    Discover the fundamental principles of technical analysis and how to apply them to cryptocurrency trading.
+                  </Typography>
+                  <Button 
+                    component={RouterLink} 
+                    to="/blog/technical-analysis-basics" 
+                    endIcon={<ArrowForward />}
+                    sx={{ color: colors.deepBlue }}
+                  >
+                    Read More
+                  </Button>
+                </CardContent>
+              </FeatureCard>
+            </Box>
+          </Box>
+          
+          <Box sx={{ textAlign: 'center', mt: 4 }}>
+            <Button
+              component={RouterLink}
+              to="/blog"
+              variant="contained"
+              size="large"
+              sx={{ 
+                bgcolor: colors.deepBlue,
+                '&:hover': {
+                  bgcolor: '#1E4B8D',
+                },
+              }}
+            >
+              View All Articles
+            </Button>
+          </Box>
+        </Container>
+      </SectionWrapper>
+      
+      {/* Testimonials Section */}
+      <SectionWrapper>
+        <Container maxWidth="lg">
+          <SectionTitle variant="h3">
+            What Our Community Says
+          </SectionTitle>
+          <Typography variant="body1" color="textSecondary" align="center" sx={{ mb: 6, maxWidth: 800, mx: 'auto' }}>
+            Hear from our community members about their experiences with @BEUhouse.
+          </Typography>
+          
+          <Box sx={{ display: 'flex', flexWrap: 'wrap', mx: -2, justifyContent: 'center' }}>
+            {/* Testimonial 1 */}
+            <Box sx={{ width: { xs: '100%', md: '33.33%' }, p: 2 }}>
+              <TestimonialCard>
+                <CardContent sx={{ p: 4, pt: 6 }}>
+                  <Typography variant="body1" sx={{ mb: 3, fontStyle: 'italic' }}>
+                    "@BEUhouse has been an invaluable resource in my crypto journey. The educational content is top-notch, and the community is supportive and knowledgeable."
+                  </Typography>
+                  <Divider sx={{ my: 3 }} />
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box
+                      component="img"
+                      src="/images/testimonial-1.jpg"
+                      alt="Sarah Johnson"
+                      sx={{ width: 50, height: 50, borderRadius: '50%', mr: 2 }}
+                    />
+                    <Box>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                        Sarah Johnson
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        Crypto Enthusiast
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </TestimonialCard>
+            </Box>
+            
+            {/* Testimonial 2 */}
+            <Box sx={{ width: { xs: '100%', md: '33.33%' }, p: 2 }}>
+              <TestimonialCard>
+                <CardContent sx={{ p: 4, pt: 6 }}>
+                  <Typography variant="body1" sx={{ mb: 3, fontStyle: 'italic' }}>
+                    "The investment simulator helped me practice trading strategies without risking real money. Now I feel much more confident investing in the actual market."
+                  </Typography>
+                  <Divider sx={{ my: 3 }} />
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box
+                      component="img"
+                      src="/images/testimonial-2.jpg"
+                      alt="Michael Chen"
+                      sx={{ width: 50, height: 50, borderRadius: '50%', mr: 2 }}
+                    />
+                    <Box>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                        Michael Chen
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        Investor
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </TestimonialCard>
+            </Box>
+            
+            {/* Testimonial 3 */}
+            <Box sx={{ width: { xs: '100%', md: '33.33%' }, p: 2 }}>
+              <TestimonialCard>
+                <CardContent sx={{ p: 4, pt: 6 }}>
+                  <Typography variant="body1" sx={{ mb: 3, fontStyle: 'italic' }}>
+                    "The forums at @BEUhouse are a goldmine of information. I've learned so much from discussions and made connections with other crypto enthusiasts worldwide."
+                  </Typography>
+                  <Divider sx={{ my: 3 }} />
+                  <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Box
+                      component="img"
+                      src="/images/testimonial-3.jpg"
+                      alt="Alex Rodriguez"
+                      sx={{ width: 50, height: 50, borderRadius: '50%', mr: 2 }}
+                    />
+                    <Box>
+                      <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+                        Alex Rodriguez
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary">
+                        Community Member
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </TestimonialCard>
+            </Box>
+          </Box>
+        </Container>
+      </SectionWrapper>
+      
+      {/* CTA Section */}
+      <CtaSection>
+        <Container maxWidth="md" sx={{ position: 'relative', zIndex: 1 }}>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography variant="h3" sx={{ fontFamily: '"Bebas Neue", sans-serif', mb: 2 }}>
+              Ready to Join the @BEUhouse Community?
+            </Typography>
+            <Typography variant="body1" sx={{ mb: 4, maxWidth: 700, mx: 'auto', opacity: 0.9 }}>
+              Start your journey into cryptocurrency education and connect with a community of like-minded individuals today.
+            </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
+              <Button
+                component={RouterLink}
+                to="/signup"
+                variant="contained"
+                size="large"
+                sx={{ 
+                  bgcolor: colors.vibrantYellow,
+                  color: colors.deepBlue,
+                  '&:hover': {
+                    bgcolor: '#D9A82C',
+                  },
+                }}
+              >
+                Sign Up Now
+              </Button>
+              <Button
+                component={RouterLink}
+                to="/about"
+                variant="outlined"
+                size="large"
+                sx={{ 
+                  borderColor: colors.white,
+                  color: colors.white,
+                  '&:hover': {
+                    borderColor: colors.vibrantYellow,
+                    backgroundColor: 'rgba(240, 193, 75, 0.1)',
+                  },
+                }}
+              >
+                Learn More
+              </Button>
+            </Box>
+          </Box>
+        </Container>
+      </CtaSection>
+      
+      {/* Investment Simulator Preview */}
+      <SectionWrapper bgcolor={colors.lightGray}>
+        <Container maxWidth="lg">
+          <SectionTitle variant="h3">
+            Investment Simulator
+          </SectionTitle>
+          <Typography variant="body1" color="textSecondary" align="center" sx={{ mb: 4, maxWidth: 800, mx: 'auto' }}>
+            Practice your investment strategies with our simulator using virtual funds. Build your portfolio and track performance without risking real money.
+          </Typography>
+          
+          <InvestmentSimulator />
+          
+          <Box sx={{ textAlign: 'center', mt: 4 }}>
+            <Button
+              component={RouterLink}
+              to="/simulator"
+              variant="contained"
+              size="large"
+              sx={{ 
+                bgcolor: colors.deepBlue,
+                '&:hover': {
+                  bgcolor: '#1E4B8D',
+                },
+              }}
+            >
+              Try Full Simulator
+            </Button>
+          </Box>
+        </Container>
+      </SectionWrapper>
+    </Box>
+  );
+};
+
+export default Home;
